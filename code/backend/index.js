@@ -11,7 +11,7 @@ const db = mysql.createConnection({
   user: 'root',
   password: '',
   database: 'db_perpustakaan',
-  port: 3306
+  port: 3307
 });
 
 db.connect(err => {
