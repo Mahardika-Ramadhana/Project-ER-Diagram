@@ -273,7 +273,7 @@ WHERE l.return_date IS NULL AND l.due_date < CURDATE();
 ---
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License.
 
-*Last Updated: [Current Date]*  
-*Project Status: 🟢 Active Development*
+*Last Updated: Fri 14 Nov 18:44 GMT+7*  
+*Project Status: Active Development*
