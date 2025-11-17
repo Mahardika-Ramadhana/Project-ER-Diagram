@@ -28,7 +28,7 @@ CREATE TABLE LOAN (
 
 CREATE TABLE FINE (
     fine_id INT PRIMARY KEY,
-    loan_id INT,
+    loan_id INT UNIQUE,
     amount DECIMAL(10,2) NOT NULL,
     fine_date DATE,
     paid_status BOOLEAN DEFAULT FALSE,
