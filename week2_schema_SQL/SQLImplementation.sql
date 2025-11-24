@@ -1,5 +1,5 @@
 CREATE TABLE BOOK (
-    book_id INT PRIMARY KEY,
+    book_id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255),
     publication_year INT,
@@ -8,7 +8,7 @@ CREATE TABLE BOOK (
 );
 
 CREATE TABLE MEMBER (
-    member_id INT PRIMARY KEY,
+    member_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE,
     phone VARCHAR(20),
@@ -16,7 +16,7 @@ CREATE TABLE MEMBER (
 );
 
 CREATE TABLE LOAN (
-    loan_id INT PRIMARY KEY,
+    loan_id INT PRIMARY KEY AUTO_INCREMENT,
     borrow_date DATE NOT NULL,
     due_date DATE NOT NULL,
     return_date DATE,
@@ -27,8 +27,8 @@ CREATE TABLE LOAN (
 );
 
 CREATE TABLE FINE (
-    fine_id INT PRIMARY KEY,
-    loan_id INT,
+    fine_id INT PRIMARY KEY AUTO_INCREMENT,
+    loan_id INT UNIQUE,
     amount DECIMAL(10,2) NOT NULL,
     fine_date DATE,
     paid_status BOOLEAN DEFAULT FALSE,
