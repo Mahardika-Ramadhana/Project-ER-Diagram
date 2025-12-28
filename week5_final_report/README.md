@@ -1,3 +1,4 @@
+```markdown
 # Library Borrowing Tracker System
 
 ## Project Overview
@@ -130,6 +131,7 @@ npm run dev
 ---
 
 ## Repository Structure
+
 ```text
 Project-ER-Diagram/
 ├── code/
@@ -154,6 +156,8 @@ Project-ER-Diagram/
 └── week5_final_report/
     ├── final_project.pdf       <-- COMPLETE REPORT
     └── README.md
+
+```
 
 ---
 
@@ -196,9 +200,3 @@ LIMIT 5;
 * Make sure to enable CORS in `main.ts` in the NestJS app: `app.enableCors();`
 
 ---
-
-*Last Updated: December 2025* *Course Project: Database Design and Implementation*
-
-```
-
-```
