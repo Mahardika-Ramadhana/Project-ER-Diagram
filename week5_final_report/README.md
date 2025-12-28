@@ -130,18 +130,30 @@ npm run dev
 ---
 
 ## Repository Structure
-
-```
+```text
 Project-ER-Diagram/
-├── week1_proposal_ERD/     # Conceptual Design
-├── week2_schema_SQL/       # PostgreSQL DDL Scripts
-├── week3_CRUD_demo/        # API Implementation
-├── week4_integration/      # Full Stack Integration
-└── week5_final_report/     # Final Documentation
-    ├── final_project.pdf   <-- COMPLETE REPORT
+├── code/
+│   ├── frontend/
+│   │   └── index.html
+│   └── sql/
+│       ├── insertData.sql
+│       ├── operationsCRUD.sql
+│       └── tableStructure.sql
+├── week1_proposal_ERD/
+│   ├── LibrarySystem.erdplus
+│   └── Proposal Project Database Design.pdf
+├── week2_schema_SQL/
+│   ├── Relational_Schema.erdplus
+│   └── SQLImplementation.sql
+├── week3_CRUD/
+│   ├── index.js
+│   ├── package.json
+│   └── package-lock.json
+├── week4_integration/
+│   └── LibraryProject/         # Full Stack Application source code
+└── week5_final_report/
+    ├── final_project.pdf       <-- COMPLETE REPORT
     └── README.md
-
-```
 
 ---
 
