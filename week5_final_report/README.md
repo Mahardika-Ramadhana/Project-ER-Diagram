@@ -1,4 +1,3 @@
-```markdown
 # Library Borrowing Tracker System
 
 ## Project Overview
