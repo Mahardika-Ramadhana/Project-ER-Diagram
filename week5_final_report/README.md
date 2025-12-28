@@ -138,9 +138,8 @@ Project-ER-Diagram/
 ├── week3_CRUD_demo/        # API Implementation
 ├── week4_integration/      # Full Stack Integration
 ├── week5_final_report/     # Final Documentation
-│   ├── final_project.pdf   <-- COMPLETE REPORT
-│   └── presentation.pptx
-└── README.md
+    ├── final_project.pdf   <-- COMPLETE REPORT
+    └── README.md
 
 ```
 
