@@ -1,289 +1,193 @@
 # Library Borrowing Tracker System
 
 ## Project Overview
-A comprehensive database-driven web application for managing library book borrowing operations. This system allows librarians to track books, manage members, and monitor borrowing activities with an intuitive interface.
+A comprehensive database-driven web application for managing library book borrowing operations. This system allows librarians to track books, manage members, and monitor borrowing activities with real-time fine calculation logic.
 
 **Project Duration:** 5 Weeks  
-**Team Size:** 2-3 Students  
-**Database:** MySQL  
-**Frontend:** Web-based Interface
+**Team Size:** 3 Students  
+**Database:** PostgreSQL (Neon DBaaS)  
+**Frontend:** React (Vite) + Tailwind CSS  
+**Backend:** NestJS  
 
 ---
 
-## Team Members
-- Daffa M. Siddiq - 24/533358/PA/22569
-- Mahardika Ramadhana - 24/538247/PA/22831
-- Hammam Muhammad Yazid - 24/534894/PA/22687
+## Team Members - Group 12
+- **Mahardika Ramadhana** (24/538247/PA/22831)
+- **Hammam Muhammad Yazid** (24/534894/PA/22687)
+- **Daffa M. Siddiq** (24/533358/PA/22569)
 
 ---
 
 ## System Objectives
-- Manage book inventory and availability
-- Track member registrations and profiles
-- Handle book borrowing and return operations
-- Generate reports on library usage
-- Provide search functionality for books and members
-
----
-
-## Database Design
-
-### Entity-Relationship Diagram (ERD)
-```mermaid
-erDiagram
-    MEMBER {
-        string member_id PK
-        string name
-        string email
-        string phone
-        date membership_date
-    }
-
-    BOOK {
-        string book_id PK
-        string title
-        string author
-        string genre
-        int publication_year
-        boolean is_available
-    }
-
-    LOAN {
-        string loan_id PK
-        date borrow_date
-        date due_date
-        date return_date
-    }
-
-    FINE {
-        string fine_id PK
-        float amount
-        string paid_status
-        date fine_date
-    }
-
-    MEMBER ||--o{ LOAN : "Melakukan"
-    BOOK   ||--o{ LOAN : "Terdapat pada"
-    LOAN   ||--|| FINE : "Menghasilkan"
-```
-
-### Relational Schema
-**Normalized to 3NF**
-
-#### Tables Structure:
-```sql
-BOOK (book_id, title, author, publication_year, genre, is_available)
-MEMBER (member_id, name, email, phone, membership_date)  
-LOAN (loan_id, book_id, member_id, borrow_date, due_date, return_date)
-```
-
-#### Key Constraints:
-- **Primary Keys:** book_id, member_id, loan_id
-- **Foreign Keys:** 
-  - LOAN.book_id → BOOK.book_id
-  - LOAN.member_id → MEMBER.member_id
+- **Automated Circulation:** Handle borrowing and returning processes in real-time.
+- **Business Logic Enforcement:** Automatically calculate due dates (14 days) and fines (IDR 1,000/day).
+- **Data Integrity:** Ensure data accuracy using 3NF normalization and Foreign Key constraints.
+- **API Documentation:** Provide clear API specs using Swagger.
 
 ---
 
 ## Technologies Used
 
 ### Backend
-- **Database:** MySQL 8.0+
-- **Server:** Node.js with Express.js
-- **ORM:** Sequelize ORM
+- **Framework:** NestJS (Node.js)
+- **Language:** TypeScript
+- **API Docs:** Swagger (OpenAPI)
 
 ### Frontend  
-- **Framework:** React.js
-- **Styling:** CSS3 with Bootstrap
+- **Framework:** React.js (via Vite)
+- **Styling:** Tailwind CSS
 - **HTTP Client:** Axios
 
-### Tools & Utilities
-- **Version Control:** Git & GitHub
-- **ERD Design:** ERDPlus
-- **API Testing:** Postman
-- **Project Management:** GitHub Projects
+### Database
+- **RDBMS:** PostgreSQL
+- **Hosting:** Neon (Serverless Postgres)
+
+---
+
+## Database Design
+
+### Relational Schema (3NF)
+The database is normalized to the Third Normal Form (3NF) to reduce redundancy.
+
+**Key Tables:**
+1. **BOOK**: Stores inventory data (`book_id`, `title`, `author`, `is_available`).
+2. **MEMBER**: Stores user data (`member_id`, `name`, `email`).
+3. **LOAN**: Transaction table linking Books and Members (`borrow_date`, `due_date`).
+
+> *Note: Fine calculation is handled dynamically via application logic based on the difference between `return_date` and `due_date`.*
 
 ---
 
 ## Installation & Setup
 
 ### Prerequisites
-- Node.js (v16 or higher)
-- MySQL Server (v8.0 or higher)
+- Node.js (v18 or higher)
+- PostgreSQL (Local or Cloud URL)
 - Git
 
 ### Step-by-Step Setup
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/your-username/DBProject_GroupX_LibrarySystem.git
-   cd DBProject_GroupX_LibrarySystem
-   ```
+   git clone [https://github.com/Mahardika-Ramadhana/Project-ER-Diagram.git](https://github.com/Mahardika-Ramadhana/Project-ER-Diagram.git)
+   cd Project-ER-Diagram
 
-2. **Database Configuration**
-   ```bash
-   # Create database
-   mysql -u root -p
-   CREATE DATABASE library_system;
-   exit;
-   
-   # Import schema
-   mysql -u root -p library_system < database/schema.sql
-   ```
+```
 
-3. **Backend Setup**
-   ```bash
-   cd backend
-   npm install
-   
-   # Configure environment variables
-   cp .env.example .env
-   # Edit .env with your database credentials
-   
-   npm start
-   ```
+2. **Backend Setup (NestJS)**
+```bash
+cd backend
+npm install
 
-4. **Frontend Setup**
-   ```bash
-   cd frontend
-   npm install
-   npm start
-   ```
+# Setup Environment Variables
+cp .env.example .env
+# Update DATABASE_URL with your PostgreSQL connection string
 
-5. **Access Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
+npm run start:dev
+
+```
+
+
+3. **Frontend Setup (Vite)**
+```bash
+cd frontend
+npm install
+npm run dev
+
+```
+
+
+4. **Access Application**
+* **Frontend UI:** http://localhost:5173
+* **Backend API:** http://localhost:3000
+* **Swagger Docs:** http://localhost:3000/api
+
+
 
 ---
 
 ## Features Implemented
 
-### Core CRUD Operations
-- **Books Management:** Add, view, update, delete books
-- **Members Management:** Register, update, deactivate members  
-- **Loans Management:** Borrow, return, track overdue books
+### 1. Dashboard & Statistics
 
-### Search & Reporting
-- **Book Search:** By title, author, genre
-- **Member Search:** By name, ID
-- **Reports:** Active loans, overdue books, popular books
+* Real-time overview of total books, members, and active loans.
+* Visual indicators for overdue items.
 
-### User Interface
-- Responsive design for desktop and mobile
-- Intuitive forms for all operations
-- Real-time status updates
+### 2. Loan Management
 
----
+* **Borrowing:** Select Member and Book -> System sets Due Date automatically (Today + 14 days).
+* **Returning:** System checks for overdue days and calculates fines instantly.
 
-## Project Timeline
+### 3. Inventory Control
 
-### Week 1: Project Proposal & ERD
-- Problem analysis and requirements gathering
-- ERD design using ERDPlus
-- Project repository setup
+* Add/Edit/Delete Books.
+* Filter books by availability status.
 
-### Week 2: Database Implementation  
-- Relational schema design
-- SQL implementation with constraints
-- Sample data population
+### 4. API Documentation
 
-### Week 3: CRUD Operations
-- Backend API development
-- Basic CRUD endpoints testing
-- Frontend-backend integration
-
-### Week 4: Application Integration
-- Complete web interface
-- Search and reporting features
-- System testing and bug fixes
-
-### Week 5: Final Polish & Documentation
-- Performance optimization
-- Comprehensive documentation
-- Final presentation preparation
+* Fully integrated Swagger UI for testing endpoints (`POST`, `GET`, `DELETE`).
 
 ---
 
 ## Repository Structure
+
 ```
-DBProject_GroupX_LibrarySystem/
-├── week1_proposal_ERD/
-│   ├── project_proposal.pdf
-│   └── library_erd.png
-├── week2_schema_SQL/
-│   ├── schema.sql
-│   └── sample_data.sql
-├── week3_CRUD_demo/
-│   ├── crud_operations.sql
-│   └── api_endpoints.md
-├── week4_integration/
-│   ├── frontend/
-│   ├── backend/
-│   └── screenshots/
-├── week5_final_report/
-│   ├── final_report.pdf
+Project-ER-Diagram/
+├── week1_proposal_ERD/     # Conceptual Design
+├── week2_schema_SQL/       # PostgreSQL DDL Scripts
+├── week3_CRUD_demo/        # API Implementation
+├── week4_integration/      # Full Stack Integration
+├── week5_final_report/     # Final Documentation
+│   ├── final_project.pdf   <-- COMPLETE REPORT
 │   └── presentation.pptx
-├── documentation/
-│   ├── API_Documentation.md
-│   └── User_Manual.md
 └── README.md
+
 ```
 
 ---
 
-## Sample Queries
+## Sample Queries (PostgreSQL)
 
-### 1. Find Available Books by Author
-```sql
-SELECT book_id, title, genre 
-FROM BOOK 
-WHERE author LIKE '%Rowling%' AND is_available = TRUE;
-```
+### 1. Check Overdue Books
 
-### 2. Get Member Borrowing History
 ```sql
-SELECT m.name, b.title, l.borrow_date, l.return_date
-FROM MEMBER m
-JOIN LOAN l ON m.member_id = l.member_id
-JOIN BOOK b ON l.book_id = b.book_id
-WHERE m.member_id = 'STU001'
-ORDER BY l.borrow_date DESC;
-```
-
-### 3. Overdue Books Report
-```sql
-SELECT m.name, b.title, l.due_date
+SELECT m.name, b.title, l.due_date, 
+       (CURRENT_DATE - l.due_date) * 1000 AS estimated_fine
 FROM LOAN l
 JOIN MEMBER m ON l.member_id = m.member_id
 JOIN BOOK b ON l.book_id = b.book_id
-WHERE l.return_date IS NULL AND l.due_date < CURDATE();
+WHERE l.return_date IS NULL AND l.due_date < CURRENT_DATE;
+
+```
+
+### 2. Get Most Popular Books
+
+```sql
+SELECT b.title, COUNT(l.loan_id) as borrow_count
+FROM LOAN l
+JOIN BOOK b ON l.book_id = b.book_id
+GROUP BY b.title
+ORDER BY borrow_count DESC
+LIMIT 5;
+
 ```
 
 ---
 
 ## Troubleshooting
 
-### Common Issues & Solutions
+**"Client does not support authentication protocol"**
 
-**Database Connection Error**
-- Verify MySQL service is running
-- Check database credentials in .env file
-- Ensure database 'library_system' exists
+* Ensure you are using the correct PostgreSQL connection string from Neon/Local.
 
-**Frontend Not Loading**
-- Confirm backend server is running on port 5000
-- Check CORS configuration
-- Verify all dependencies are installed
+**"CORS Error in Frontend"**
 
-**API Endpoints Returning Errors**
-- Check database table structures match schema
-- Verify foreign key constraints
-- Review server logs for detailed error messages
+* Make sure to enable CORS in `main.ts` in the NestJS app: `app.enableCors();`
 
 ---
 
-## License
-This project is licensed under the MIT License.
+*Last Updated: December 2025* *Course Project: Database Design and Implementation*
 
-*Last Updated: Fri 14 Nov 18:44 GMT+7*  
-*Project Status: Active Development*
+```
+
+```
