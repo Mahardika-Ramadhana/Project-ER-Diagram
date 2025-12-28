@@ -137,7 +137,7 @@ Project-ER-Diagram/
 ├── week2_schema_SQL/       # PostgreSQL DDL Scripts
 ├── week3_CRUD_demo/        # API Implementation
 ├── week4_integration/      # Full Stack Integration
-├── week5_final_report/     # Final Documentation
+└── week5_final_report/     # Final Documentation
     ├── final_project.pdf   <-- COMPLETE REPORT
     └── README.md
 
